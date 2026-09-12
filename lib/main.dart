@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
+import 'screens/scan_screen.dart';
 import 'state/demo_state.dart';
 
 const kGreen = Color(0xFF2C5F2D);
@@ -50,7 +51,7 @@ class HomeShellState extends State<HomeShell> {
         context.read<DemoState>().selectField(fieldId);
         goToTab(1);
       }),
-      const Center(child: Text('Scan coming soon')),
+      const ScanScreen(),
       const Center(child: Text('Map coming soon')),
       const Center(child: Text('Alerts coming soon')),
       const Center(child: Text('Expert coming soon')),
