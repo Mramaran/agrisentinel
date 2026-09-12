@@ -22,4 +22,13 @@ void main() {
     expect(find.textContaining('Worsening'), findsOneWidget);
     expect(find.textContaining('Improving'), findsOneWidget);
   });
+
+  testWidgets('tapping a field opens the digital twin with a progression banner', (tester) async {
+    await tester.pumpWidget(const AgriSentinelApp());
+    await tester.pumpAndSettle();
+    await tester.tap(find.textContaining('Annur North'));
+    await tester.pumpAndSettle();
+    expect(find.text('Crop Digital Twin'), findsOneWidget);
+    expect(find.textContaining('Progression detected'), findsOneWidget);
+  });
 }

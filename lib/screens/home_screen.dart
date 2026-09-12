@@ -4,6 +4,7 @@ import '../core/scoring.dart';
 import '../main.dart';
 import '../state/demo_state.dart';
 import '../widgets/score_gauge.dart';
+import 'field_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final void Function(String fieldId) onScan;
@@ -28,7 +29,10 @@ class HomeScreen extends StatelessWidget {
         for (final f in state.fields)
           Card(
             child: InkWell(
-              onTap: () => state.selectField(f.id),
+              onTap: () {
+                state.selectField(f.id);
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) => FieldScreen(fieldId: f.id)));
+              },
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(
