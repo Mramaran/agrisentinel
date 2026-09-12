@@ -55,4 +55,28 @@ void main() {
     final m = img.decodePng(a.maskPng)!;
     expect(m.width, 160);
   });
+
+  test('dark background is not counted as lesion', () {
+    // Green leaf on a near-black ground, with one dark necrotic patch on the
+    // leaf itself. Only the patch should register.
+    final i = img.Image(width: 100, height: 100);
+    for (var y = 0; y < 100; y++) {
+      for (var x = 0; x < 100; x++) {
+        final inLeaf = x >= 20 && x < 80 && y >= 20 && y < 80; // 3600 px
+        final inPatch = x >= 30 && x < 42 && y >= 30 && y < 42; // 144 px = 4%
+        if (!inLeaf) {
+          i.setPixelRgb(x, y, 20, 22, 18); // dark soil/shadow
+        } else if (inPatch) {
+          i.setPixelRgb(x, y, 25, 20, 15); // necrosis on the leaf
+        } else {
+          i.setPixelRgb(x, y, 40 + ((x + y) % 2 == 0 ? 30 : 0), 150, 40);
+        }
+      }
+    }
+    final a = analyzeLeaf(_png(i));
+    expect(a.isLeaf, true);
+    // The patch is 144 of 3600 leaf px = 4%. If the background counted, the
+    // lesion share would be far higher.
+    expect(a.severityPct, closeTo(4, 3));
+  });
 }

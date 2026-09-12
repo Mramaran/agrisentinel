@@ -9,7 +9,7 @@ Demo for SDG NGP AI INNOVATE 2026, problem A1. No backend, no network; all logic
 
 ## 30-minute review script
 1. Home: two fields, Annur North worsening (78), Thondamuthur improving (84).
-2. Scan > early_blight: Early blight, 93% confidence, severity 24.6% (treat band), RELIABILITY HIGH, lesion map, action TREAT, Tamil speak.
+2. Scan > early_blight: Early blight, 93% confidence, severity 5.8% (treat band), RELIABILITY HIGH, lesion map, action TREAT, Tamil speak.
 3. Scan > ambiguous: RELIABILITY LOW, top-2 within 9 points, expert line.
 4. Scan > not_a_leaf: UNKNOWN ANOMALY.
 5. From the early blight result tap Save to field: Home score drops, field page shows "Progression detected".
@@ -20,7 +20,7 @@ Demo for SDG NGP AI INNOVATE 2026, problem A1. No backend, no network; all logic
 10. Reset icon in the app bar restores the seed.
 
 ## What is real and what is seeded
-Real: pixel-based leaf detection, lesion percent, blur quality, colour-rule disease guess, all scoring rules, spread forecast, priority ranking, trend detection.
+Real: pixel-based leaf segmentation (dark pixels count as lesion only when enclosed by plant tissue, so soil and shadow are not scored as disease), lesion percent, blur quality, colour-rule disease guess, all scoring rules, spread forecast, priority ranking, trend detection.
 Seeded: field history, zone health values, weather, the first alert and expert case.
 Not included: CNN model, backend, drone stitching, SMS. See ../TECHNICAL_APPROACH.md for the full system.
 

@@ -36,6 +36,37 @@ _Px _classify(int r, int g, int b) {
   return _Px.background;
 }
 
+/// Marks every pixel reachable from the image border without crossing plant
+/// tissue. Those are outside the leaf; anything left is enclosed by it.
+List<bool> _floodFromBorder(List<bool> tissue, int w, int h) {
+  final outside = List<bool>.filled(w * h, false);
+  final stack = <int>[];
+  void push(int i) {
+    if (!tissue[i] && !outside[i]) {
+      outside[i] = true;
+      stack.add(i);
+    }
+  }
+
+  for (var x = 0; x < w; x++) {
+    push(x);
+    push((h - 1) * w + x);
+  }
+  for (var y = 0; y < h; y++) {
+    push(y * w);
+    push(y * w + w - 1);
+  }
+  while (stack.isNotEmpty) {
+    final i = stack.removeLast();
+    final x = i % w, y = i ~/ w;
+    if (x > 0) push(i - 1);
+    if (x < w - 1) push(i + 1);
+    if (y > 0) push(i - w);
+    if (y < h - 1) push(i + w);
+  }
+  return outside;
+}
+
 LeafAnalysis analyzeLeaf(Uint8List bytes) {
   final decoded = img.decodeImage(bytes);
   if (decoded == null) {
@@ -54,16 +85,33 @@ LeafAnalysis analyzeLeaf(Uint8List bytes) {
     for (var x = 0; x < w; x++) {
       final p = im.getPixel(x, y);
       final r = p.r.toInt(), g = p.g.toInt(), b = p.b.toInt();
-      final c = _classify(r, g, b);
-      classes[y * w + x] = c;
+      classes[y * w + x] = _classify(r, g, b);
       gray[y * w + x] = 0.299 * r + 0.587 * g + 0.114 * b;
-      switch (c) {
-        case _Px.green: green++;
-        case _Px.yellow: yellow++;
-        case _Px.brown: brown++;
-        case _Px.dark: dark++;
-        case _Px.background: break;
-      }
+    }
+  }
+
+  // Dark pixels are ambiguous: necrotic blight looks the same as soil, shadow
+  // or foliage behind the leaf. Green, yellow and brown are unambiguously plant
+  // tissue, so grow that mask and keep only the dark pixels lying inside it.
+  // Necrosis at a leaf margin sits within a few pixels of live tissue and is
+  // kept; dark background away from the leaf is dropped.
+  final tissue = List<bool>.filled(w * h, false);
+  for (var i = 0; i < w * h; i++) {
+    final c = classes[i];
+    tissue[i] = c == _Px.green || c == _Px.yellow || c == _Px.brown;
+  }
+  final outside = _floodFromBorder(tissue, w, h);
+  for (var i = 0; i < w * h; i++) {
+    if (classes[i] == _Px.dark && outside[i]) classes[i] = _Px.background;
+  }
+
+  for (var i = 0; i < w * h; i++) {
+    switch (classes[i]) {
+      case _Px.green: green++;
+      case _Px.yellow: yellow++;
+      case _Px.brown: brown++;
+      case _Px.dark: dark++;
+      case _Px.background: break;
     }
   }
 
