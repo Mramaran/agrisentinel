@@ -53,9 +53,17 @@ class HomeScreen extends StatelessWidget {
                               size: 18,
                             ),
                             const SizedBox(width: 4),
-                            Text(switch (f.trend) { Trend.worsening => 'Worsening', Trend.improving => 'Improving', Trend.stable => 'Stable' }),
-                            const Spacer(),
-                            Text('${f.scans.length} scans', style: const TextStyle(color: Colors.grey)),
+                            Flexible(
+                              child: Text(
+                                switch (f.trend) { Trend.worsening => 'Worsening', Trend.improving => 'Improving', Trend.stable => 'Stable' },
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Flexible(
+                              child: Text('${f.scans.length} scans',
+                                  style: const TextStyle(color: Colors.grey), overflow: TextOverflow.ellipsis, textAlign: TextAlign.end),
+                            ),
                           ]),
                         ],
                       ),

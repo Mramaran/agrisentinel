@@ -38,10 +38,12 @@ class AlertsScreen extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(a.bodyTamil, style: const TextStyle(color: kGreen)),
                 const SizedBox(height: 8),
+                const Text('Spread risk', style: TextStyle(fontSize: 11, color: Colors.grey)),
+                const SizedBox(height: 2),
                 Row(children: [
-                  _risk('24 h', a.forecast.h24),
-                  _risk('48 h', a.forecast.h48),
-                  _risk('72 h', a.forecast.h72),
+                  Expanded(child: _risk('24 h', a.forecast.h24)),
+                  Expanded(child: _risk('48 h', a.forecast.h48)),
+                  Expanded(child: _risk('72 h', a.forecast.h72)),
                 ]),
                 const SizedBox(height: 8),
                 SpeakButton(english: '${a.title}. ${a.body}', tamil: a.bodyTamil),
@@ -54,12 +56,9 @@ class AlertsScreen extends StatelessWidget {
 
   Widget _risk(String label, double v) {
     final c = v >= 0.6 ? kRed : (v >= 0.4 ? kOrange : kGreen);
-    return Padding(
-      padding: const EdgeInsets.only(right: 12),
-      child: Column(children: [
-        Text('${(v * 100).round()}%', style: TextStyle(fontWeight: FontWeight.bold, color: c, fontSize: 16)),
-        Text('Spread risk $label', style: const TextStyle(fontSize: 11, color: Colors.grey)),
-      ]),
-    );
+    return Column(children: [
+      Text('${(v * 100).round()}%', style: TextStyle(fontWeight: FontWeight.bold, color: c, fontSize: 16)),
+      Text(label, style: const TextStyle(fontSize: 11, color: Colors.grey)),
+    ]);
   }
 }
