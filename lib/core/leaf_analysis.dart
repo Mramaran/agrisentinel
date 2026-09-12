@@ -85,7 +85,9 @@ LeafAnalysis analyzeLeaf(Uint8List bytes) {
       if (classes[i - 1] == _Px.background ||
           classes[i + 1] == _Px.background ||
           classes[i - w] == _Px.background ||
-          classes[i + w] == _Px.background) continue;
+          classes[i + w] == _Px.background) {
+        continue;
+      }
       final lap = 4 * gray[i] - gray[i - 1] - gray[i + 1] - gray[i - w] - gray[i + w];
       sum += lap;
       sumSq += lap * lap;
