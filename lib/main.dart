@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
+import 'screens/alerts_screen.dart';
 import 'screens/map_screen.dart';
 import 'screens/scan_screen.dart';
 import 'state/demo_state.dart';
@@ -54,7 +55,7 @@ class HomeShellState extends State<HomeShell> {
       }),
       const ScanScreen(),
       const MapScreen(),
-      const Center(child: Text('Alerts coming soon')),
+      const AlertsScreen(),
       const Center(child: Text('Expert coming soon')),
     ];
     return Scaffold(

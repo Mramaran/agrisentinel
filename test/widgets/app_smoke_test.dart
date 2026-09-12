@@ -31,4 +31,17 @@ void main() {
     expect(find.text('Crop Digital Twin'), findsOneWidget);
     expect(find.textContaining('Progression detected'), findsOneWidget);
   });
+
+  testWidgets('simulating a neighbour detection adds an alert', (tester) async {
+    await tester.pumpWidget(const AgriSentinelApp());
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Alerts'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('1.6 km away'), findsOneWidget);
+    await tester.tap(find.text('Simulate neighbour detection'));
+    await tester.pumpAndSettle();
+    // the caption under the button also says "800 m away", so match the alert title
+    expect(find.textContaining('Late blight confirmed 800 m away'), findsOneWidget);
+    expect(find.textContaining('Spread risk'), findsWidgets);
+  });
 }
