@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('${f.name}  ·  ${f.id}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                          Text('${f.crop}, ${f.acres.toStringAsFixed(0)} acres, ${f.stage}'),
+                          Text('${f.crop}, ${f.acres.toStringAsFixed(0)} acres, ${f.stage}  ·  ${f.scans.length} scans'),
                           const SizedBox(height: 4),
                           Row(children: [
                             Icon(
@@ -58,11 +58,6 @@ class HomeScreen extends StatelessWidget {
                                 switch (f.trend) { Trend.worsening => 'Worsening', Trend.improving => 'Improving', Trend.stable => 'Stable' },
                                 overflow: TextOverflow.ellipsis,
                               ),
-                            ),
-                            const SizedBox(width: 8),
-                            Flexible(
-                              child: Text('${f.scans.length} scans',
-                                  style: const TextStyle(color: Colors.grey), overflow: TextOverflow.ellipsis, textAlign: TextAlign.end),
                             ),
                           ]),
                         ],

@@ -30,7 +30,7 @@ class _MapScreenState extends State<MapScreen> {
           Expanded(child: DropdownButton<String>(
             value: state.selectedFieldId,
             isExpanded: true,
-            items: [for (final x in state.fields) DropdownMenuItem(value: x.id, child: Text('${x.name}  ·  ${x.id}  ·  ${x.acres.toStringAsFixed(0)} acres'))],
+            items: [for (final x in state.fields) DropdownMenuItem(value: x.id, child: Text('${x.name}  ·  ${x.id}', overflow: TextOverflow.ellipsis))],
             onChanged: (v) => v == null ? null : state.selectField(v),
           )),
           const SizedBox(width: 8),
