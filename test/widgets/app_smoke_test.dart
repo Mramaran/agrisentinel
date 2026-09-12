@@ -11,4 +11,15 @@ void main() {
       expect(find.text(label), findsWidgets);
     }
   });
+
+  testWidgets('home lists both seeded fields with scores', (tester) async {
+    await tester.pumpWidget(const AgriSentinelApp());
+    await tester.pumpAndSettle();
+    expect(find.textContaining('Annur North'), findsOneWidget);
+    expect(find.textContaining('Thondamuthur'), findsOneWidget);
+    expect(find.text('78'), findsOneWidget);
+    expect(find.text('84'), findsOneWidget);
+    expect(find.textContaining('Worsening'), findsOneWidget);
+    expect(find.textContaining('Improving'), findsOneWidget);
+  });
 }
