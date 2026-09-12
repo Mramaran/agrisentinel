@@ -44,4 +44,16 @@ void main() {
     expect(find.textContaining('Late blight confirmed 800 m away'), findsOneWidget);
     expect(find.textContaining('Spread risk'), findsWidgets);
   });
+
+  testWidgets('expert can verify a case and the counter increments', (tester) async {
+    await tester.pumpWidget(const AgriSentinelApp());
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Expert'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('Verified labels: 0'), findsOneWidget);
+    await tester.tap(find.text('Verify').first);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('Verified labels: 1'), findsOneWidget);
+    expect(find.textContaining('Verified as'), findsOneWidget);
+  });
 }

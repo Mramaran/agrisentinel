@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'screens/alerts_screen.dart';
+import 'screens/expert_screen.dart';
 import 'screens/map_screen.dart';
 import 'screens/scan_screen.dart';
 import 'state/demo_state.dart';
@@ -56,7 +57,7 @@ class HomeShellState extends State<HomeShell> {
       const ScanScreen(),
       const MapScreen(),
       const AlertsScreen(),
-      const Center(child: Text('Expert coming soon')),
+      const ExpertScreen(),
     ];
     return Scaffold(
       appBar: AppBar(
