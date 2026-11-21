@@ -2,6 +2,17 @@
 
 Demo for SDG NGP AI INNOVATE 2026, problem A1. No backend, no network; all logic runs locally on seeded data and pixel heuristics.
 
+## Screenshots
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/scan_result.png" width="180" alt="Scan result with lesion map"><br><sub>Scan result + lesion map</sub></td>
+    <td align="center"><img src="docs/screenshots/digital_twin.png" width="180" alt="Crop digital twin with health trend"><br><sub>Crop digital twin</sub></td>
+    <td align="center"><img src="docs/screenshots/zone_map.png" width="180" alt="Zone map with AI Scout route"><br><sub>Zone map + AI Scout</sub></td>
+    <td align="center"><img src="docs/screenshots/alerts.png" width="180" alt="Neighbour alert with spread risk"><br><sub>Spread-risk alerts</sub></td>
+    <td align="center"><img src="docs/screenshots/expert.png" width="180" alt="KVK expert console"><br><sub>Expert console</sub></td>
+  </tr>
+</table>
+
 ## Download
 Get the Android APK from the [latest release](../../releases/latest). Most phones need `app-arm64-v8a-release.apk`; use `armeabi-v7a` for older 32-bit phones and `x86_64` for emulators. Allow "install unknown apps" when prompted.
 
