@@ -2,7 +2,10 @@
 
 Demo for SDG NGP AI INNOVATE 2026, problem A1. No backend, no network; all logic runs locally on seeded data and pixel heuristics.
 
-## Run
+## Download
+Get the Android APK from the [latest release](../../releases/latest). Most phones need `app-arm64-v8a-release.apk`; use `armeabi-v7a` for older 32-bit phones and `x86_64` for emulators. Allow "install unknown apps" when prompted.
+
+## Run from source
 - Windows: `flutter run -d windows` (needs Developer Mode enabled for plugin symlinks)
 - Android: `flutter build apk --release --split-per-abi` then install `build/app/outputs/flutter-apk/app-arm64-v8a-release.apk`
 - Tests: `flutter test`
@@ -22,7 +25,7 @@ Demo for SDG NGP AI INNOVATE 2026, problem A1. No backend, no network; all logic
 ## What is real and what is seeded
 Real: pixel-based leaf segmentation (dark pixels count as lesion only when enclosed by plant tissue, so soil and shadow are not scored as disease), lesion percent, blur quality, colour-rule disease guess, all scoring rules, spread forecast, priority ranking, trend detection.
 Seeded: field history, zone health values, weather, the first alert and expert case.
-Not included: CNN model, backend, drone stitching, SMS. See ../TECHNICAL_APPROACH.md for the full system.
+Not included: CNN model, backend, drone stitching, SMS.
 
 ## Notes
 - Bundled sample photos come from the PlantDoc dataset (CC BY 4.0); `not_a_leaf.jpg` is generated. See `assets/samples/SOURCES.md`.

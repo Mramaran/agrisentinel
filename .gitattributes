@@ -1,0 +1,11 @@
+# Normalise line endings so Windows checkouts don't show every file as modified.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.apk binary
+*.jar binary
